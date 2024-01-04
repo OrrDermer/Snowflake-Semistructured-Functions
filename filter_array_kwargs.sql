@@ -1610,6 +1610,24 @@ var parse_function_string = function(function_string) {
     }
   }
 
+  function create_object() {
+    if (arguments.length % 2 != 0) {
+      throw new Error("Odd number of arguments");
+    }
+    const tbr = new Object()
+    for (var i = 0; i < arguments.length; i += 2) {
+      tbr[arguments[i]] = arguments[i+1];
+    }
+    return tbr
+  } 
+
+  function sorted(arr) {
+    if (!Array.isArray(arr)) {
+      throw new Error('Argument is not an array');
+    }
+    return [...arr].sort()
+  } 
+
   function arrayMap(f, a) {
     if (typeof f !== 'function') {
       throw new Error('First argument to map is not a function');
@@ -1773,7 +1791,9 @@ var parse_function_string = function(function_string) {
       filter: arrayFilter,
       indexOf: stringOrArrayIndexOf,
       join: arrayJoin,
-      sum: sum
+      sum: sum,
+      object: create_object,
+      sorted: sorted
     };
 
     this.consts = {

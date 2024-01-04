@@ -73,6 +73,11 @@ from t1
 |   `[ {"int_value": 5, "should_keep": false}, {"int_value": 6, "should_keep": true} ]`  |   `10`            |   `[ 15, 16 ]`       |   `[ {"int_value": 6, "should_keep": true } ]`  |
 
 
+## Additional functions
+In addition to the functions defined in `expr_eval`, these functions have been implemented:
+* `object` - Creates an object, similar to `OBJECT_CONSTRUCT` in snowflake (e.g. `transform_array('object("name1", x.arg1, "name2", x.arg2)')`).
+* `sorted` - Sorts an array.
+
 
 ## Implementation details
 Other platforms, such as Spark and Presto/Trino, allow defining lambda functions for creating the transformations. In order to simulate this ability under Snowflake, we have turned to Javascript. However, Snowflake disallows running `eval` in UDFs ([and rightfully so!](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!)), which means we can't define lambda functions dynamically.
